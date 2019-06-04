@@ -1,0 +1,38 @@
+/*
+font-family: 'Bevan', cursive;
+font-family: 'Gorditas', cursive;
+font-family: 'Keania One', cursive;
+font-family: 'Wallpoet', cursive;
+*/
+html {
+    border: darkred;
+}
+body {
+    background: goldenrod;
+}
+
+h1 {
+    font-family: 'Wallpoet', monospace;
+    color: red;
+}
+h4 {
+    font-family: 'Gorditas', monospace;
+}
+
+.jumbotron {
+    background: url("/assets/img/Burger_stack.jpg") center;
+}
+
+.card {
+    background: darkred;
+    /* border-color: darkred; */
+}
+
+.card-header {
+    background: limegreen;
+    /* border-color: darkred; */
+}
+
+.list-group-item {
+    background: gold;
+}

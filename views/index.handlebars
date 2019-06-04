@@ -1,0 +1,51 @@
+<div class="row">
+    <div class="col">
+        <div class="card mb-1" id="waiting">
+            <div class="card-header pb-0">
+                <h4>Burgers to be eaten</h4>
+            </div>
+            <ul class="list-group">
+                {{#each burgers}}
+                {{#unless devoured}}
+                <li class="list-group-item d-flex justify-content-between">{{burger_name}}
+                    <button class="eat-it btn btn-outline-secondary" data-id="{{id}}" data-devoured="true">
+                        Eat It!
+                    </button>
+                </li>
+                {{/unless}}
+                {{/each}}
+            </ul>
+        </div>
+        <div class="card mb-1">
+            <div class="card-header pb-0">
+                <h4>Add a burger to the menu:</h4>
+            </div>
+            <div class="card-body">
+                <form id="add-burger">
+                    <div class="input-group">
+                        <label for="burger-name" class="d-none">Add a burger to the menu:</label>
+                        <input type="text" class="form-control" name="burger-name" required="true">
+                        <div class="input-group-append">
+                            <input type="submit" class="btn btn-primary" value="Submit">
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="col">
+        <div class="card mb-1" id="eaten">
+            <div class="card-header pb-0">
+                <h4>Burgers devoured</h4>
+            </div>
+            <ul class="list-group">
+                {{#each burgers}}
+                {{#if devoured}}
+                <li class="list-group-item">{{burger_name}}</li>
+                {{/if}}
+                {{/each}}
+            </ul>
+        </div>
+    </div>
+</div>
