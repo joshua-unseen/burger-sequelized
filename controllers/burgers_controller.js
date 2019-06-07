@@ -1,11 +1,11 @@
 const express = require("express");
-const burger = require("../models/burger");
+const db = require("../models");
 
 const router = express.Router();
 
 // Get
-router.get("/", function(req, res) {
-    burger.allBurgers(function(data) {
+router.get("/", function (req, res) {
+    db.burger.findAll({}).then(function (data) {
         var hbrs = {
             burgers: data
         };
@@ -15,27 +15,40 @@ router.get("/", function(req, res) {
 });
 
 // Post
-router.post("/api/burgers", function(req, res) {
+router.post("/api/burgers", function (req, res) {
     // console.log(res);
-    burger.newBurger(req.body.burgerName, function(result) {
-        res.json({id: result.insertId});
+    db.burger.create({ burger_name: req.body.burgerName }).then(function (result) {
+        res.json({ id: result.insertId });
     });
+    // burger.newBurger(req.body.burgerName, function(result) {
+    //     res.json({id: result.insertId});
+    // });
 });
 
 // Put
-router.put("/api/burgers/:id", function(req, res) {
+router.put("/api/burgers/:id", function (req, res) {
     console.log(req.params.id);
-    var condition = {"id": parseInt(req.params.id)};
-    // console.log(condition);
-    burger.updateBurger(condition, function(result) {
-        if (result.changedRows === 0) {
-            return res.status(404).end();
-        }
-        else
+    console.log(req.body);
+    db.burger.update(req.body,
         {
-            res.status(200).end();
-        }
-    });
+            where: { id: req.params.id }
+        })
+        .then(function (result) {
+            if (result.changedRows === 0) {
+                return res.status(404).end();
+            }
+            else {
+                res.status(200).end();
+            }
+        });
+    // burger.updateBurger(condition, function (result) {
+    //     if (result.changedRows === 0) {
+    //         return res.status(404).end();
+    //     }
+    //     else {
+    //         res.status(200).end();
+    //     }
+    // });
 });
 
 module.exports = router;

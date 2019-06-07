@@ -3,7 +3,10 @@ $(function () { // On load...
     $(".eat-it").on("click", function (event) {
         var id = $(this).data("id");
         $.ajax("/api/burgers/" + id,
-            { type: "PUT" })
+            {
+                type: "PUT",
+                data: {devoured: true}
+            })
             .then(function () {
                 console.log("Burger id " + id + " devoured.");
                 location.reload();
