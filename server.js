@@ -8,10 +8,13 @@ const app = express();
 // process.env.PORT lets the port be set by Heroku
 var PORT = process.env.PORT || 8080;
 
-//Root for static resources
+// Sequelize models
+const db = require("./models");
+
+// Static resources
 app.use(express.static("public"));
 
-// Parse request body as JSON
+// JSON handling
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
@@ -23,6 +26,8 @@ app.set("view engine", "handlebars");
 app.use(routes);
 
 // Start the server
-app.listen(PORT, function() {
-    console.log("server is listening on http://localhost:" + PORT);
+db.sequelize.sync().then(function() {
+    app.listen(PORT, function() {
+        console.log("server is listening on http://localhost:" + PORT);
+    });
 });
