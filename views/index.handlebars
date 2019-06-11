@@ -8,9 +8,12 @@
                 {{#each burgers}}
                 {{#unless devoured}}
                 <li class="list-group-item d-flex justify-content-between">{{burger_name}}
-                    <button class="eat-it btn btn-outline-secondary" data-id="{{id}}" data-devoured="true">
-                        Eat It!
-                    </button>
+                    <div>
+                        <form class="eat-burger" data-id="{{id}}">
+                            <input type="text" placeholder="Customer" class="customer-name" name="customer-name">
+                            <input type="submit" class="btn btn-outline-secondary" value="Eat It!">
+                        </form>
+                    </div>
                 </li>
                 {{/unless}}
                 {{/each}}

@@ -14,6 +14,17 @@ router.get("/", function (req, res) {
     });
 });
 
+router.get("/api/customers/:name", function(req, res){
+    db.Customer.findAll({name: req.params.name}).then(function(result) {
+        if(result) {
+            res.json(result);
+        }
+        else {
+            res.status(404).end();
+        }
+    });
+});
+
 // Post
 router.post("/api/burgers", function (req, res) {
     // console.log(res);

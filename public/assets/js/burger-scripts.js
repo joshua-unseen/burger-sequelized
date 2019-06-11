@@ -1,7 +1,17 @@
 $(function () { // On load...
     // Eat button click handler
-    $(".eat-it").on("click", function (event) {
+    $(".eat-burger").on("submit", function (event) {
+        event.preventDefault();
         var id = $(this).data("id");
+        var custName = $(this).children("input[name='customer-name']").val().trim();
+        $.ajax("/api/customers/" + custName, {
+            type: "GET"
+        }).then(function(response) {
+            console.log(response);
+            if (response.length === 0) {
+                
+            }
+        });
         $.ajax("/api/burgers/" + id,
             {
                 type: "PUT",
@@ -9,7 +19,7 @@ $(function () { // On load...
             })
             .then(function () {
                 console.log("Burger id " + id + " devoured.");
-                location.reload();
+                // location.reload();
             });
     });
 
